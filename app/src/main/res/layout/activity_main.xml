@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="8dp"
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rectangle"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <!--Meeting name with textview and edittext features-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/meeting_name_hint"
+                    android:id="@+id/meetingNameTextInputXML"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <!--Setting the meeting time-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_weight="1.5">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/when"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="13sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Monday-2019"
+                        android:background="@drawable/rectangle" android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                        android:drawablePadding="8dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:paddingRight="4dp"
+                        android:id="@+id/textViewForDateAsSpinnerXML"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1.5">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_text"
+                    android:background="@drawable/rectangle" android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                    android:drawablePadding="8dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingRight="4dp"
+                    android:id="@+id/textViewForTimeAsSpinnerXML"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--The layout for people to invite-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5dp"
+                android:text="@string/people_to_invite"/>
+
+            <!--Now we are setting the search layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/user_name"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:layout_margin="5dp"
+                        android:id="@+id/userNameSearchXML"/>
+                    <Button
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_action_search"
+                        android:id="@+id/searchButtonXML"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@android:color/darker_gray"/>
+            </LinearLayout>
+
+            <!--Adding the recyclerView in order to show the users-->
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerViewUsersXML"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5dp"
+                android:text="Invited People"/>
+
+            <!--This is an another layout which will be used when an user will be added-->
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:id="@+id/recyclerViewNewAddedUsersXML"/>
+            <!--Checkbox with notify layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:id="@+id/notifyCheckBoxXML"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="16sp"
+                    android:text="Notify people on slack of the meeting?"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:padding="5dp"
+                android:background="@drawable/button_back"
+                android:text="Create Meeting"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:id="@+id/createMeetingButtonXML"/>
+        </LinearLayout>
+
+    </TableLayout>
+
+
+
+</ScrollView>
