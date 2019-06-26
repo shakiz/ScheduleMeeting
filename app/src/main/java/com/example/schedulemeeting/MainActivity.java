@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -30,9 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewUser,recyclerViewNewAddedUser;
@@ -45,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText textInputEditText;
     private RecyclerViewUserAdapter recyclerViewUserAdapter;
     private RecyclerViewAddedUserAdapter recyclerViewAddedUserAdapter;
-    private ArrayList<UserModel> userList,userSearchArrayList, addedUserArrayList,finalUserArrayList;
+    private ArrayList<UserModel> userList,userSearchArrayList, addedUserArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             userSearchArrayList.add(new UserModel(userList.get(i).getIcon(),userList.get(i).getName()));
                         }
                     }
+                    //Setting the adapter for searching an user
                     layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
                     recyclerViewUser.setLayoutManager(layoutManager);
                     recyclerViewUserAdapter =new RecyclerViewUserAdapter(getApplicationContext(),userSearchArrayList);
@@ -96,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //Adding the selected user into added list user
                 addedUserArrayList.add(new UserModel(userSearchArrayList.get(position).getIcon(),userSearchArrayList.get(position)                      .getName()));
-                //Setting the visibility for new added user as visible
+                //Setting the visibility for new added user as visible and then setting the adapter
                 visibilityVisible(recyclerViewNewAddedUser);
                 recyclerViewAddedUserAdapter=new RecyclerViewAddedUserAdapter(getApplicationContext(),addedUserArrayList);
                 layoutManager=new LinearLayoutManager(getApplicationContext());
@@ -164,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     //This method returns the time into our desired format
-    private String getTime(int hr,int min) {
-        Time tme = new Time(hr,min,0);
+    private String getTime(int hour,int min) {
+        Time tme = new Time(hour,min,0);
         Format formatter;
         formatter = new SimpleDateFormat("h:mm a");
         return formatter.format(tme);
@@ -198,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
         userList=new ArrayList<>();
         userSearchArrayList=new ArrayList<>();
         addedUserArrayList =new ArrayList<>();
-        finalUserArrayList=new ArrayList<>();
     }
     public void setData(){
         //Adding userNames and their corresponding icons
