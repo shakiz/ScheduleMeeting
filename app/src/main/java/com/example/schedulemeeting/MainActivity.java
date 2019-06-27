@@ -2,6 +2,7 @@ package com.example.schedulemeeting;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,11 +13,15 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -36,13 +41,17 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private TextView datePickerTextView,timePickerTextView;
     private EditText userNameEditText;
-    private Button searchButton,createMeetingButton;
+    private Button searchButton;
+    private FloatingActionButton createMeetingButton;
+    private Spinner meetingRoom;
     private CheckBox checkBoxNotify;
     private String userNameStr,TAG="MainActivity",dateStr,timeStr;
     private TextInputEditText textInputEditText;
     private RecyclerViewUserAdapter recyclerViewUserAdapter;
     private RecyclerViewAddedUserAdapter recyclerViewAddedUserAdapter;
     private ArrayList<UserModel> userList,userSearchArrayList, addedUserArrayList;
+    private ArrayList<String> meetingRoomList;
+    private ArrayAdapter<String> meetingRoomAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         visibilityGone(recyclerViewNewAddedUser);
         //This method will be used to get or add data into our arrayLists
         setData();
+        //This method will be used to add data and set the spinner adapter for meeting rom
+        insertAndSetMeetingRoom();
         //Setting the click listener for search button
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,12 +88,16 @@ public class MainActivity extends AppCompatActivity {
                     recyclerViewUserAdapter =new RecyclerViewUserAdapter(getApplicationContext(),userSearchArrayList);
                     recyclerViewUser.setAdapter(recyclerViewUserAdapter);
                 }
+                //After pressing the searching button soft keyboard will be hidden byt the following two lines of code
+                InputMethodManager inputMethodManager= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
             }
         });
         //This part will be used to add an user by means of searching
         recyclerViewUser.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerViewUser, new RecyclerViewTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                //Checking the selected user is already listed or not
                 UserModel userModel = userSearchArrayList.get(position);
                 if(addedUserArrayList.size()>0){
                     for (UserModel user : addedUserArrayList) {
@@ -161,6 +176,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void insertAndSetMeetingRoom() {
+        meetingRoomList.add("Select Meeting Room");
+        meetingRoomList.add("Korobi");
+        meetingRoomList.add("Joba");
+        meetingRoomList.add("Athena");
+        meetingRoomList.add("Padma");
+        //The following three lines of code will be used to attach the data and view for meeting room
+        meetingRoomAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,meetingRoomList);
+        meetingRoomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        meetingRoom.setAdapter(meetingRoomAdapter);
+    }
+
     //This method returns the time into our desired format
     private String getTime(int hour,int min) {
         Time tme = new Time(hour,min,0);
@@ -193,9 +221,11 @@ public class MainActivity extends AppCompatActivity {
         createMeetingButton=findViewById(R.id.createMeetingButtonXML);
         textInputEditText=findViewById(R.id.meetingNameTextInputXML);
         checkBoxNotify=findViewById(R.id.notifyCheckBoxXML);
+        meetingRoom=findViewById(R.id.spinnerMeetingRoomXML);
         userList=new ArrayList<>();
         userSearchArrayList=new ArrayList<>();
         addedUserArrayList =new ArrayList<>();
+        meetingRoomList=new ArrayList<>();
     }
     public void setData(){
         //Adding userNames and their corresponding icons

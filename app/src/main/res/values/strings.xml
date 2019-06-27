@@ -10,4 +10,5 @@
     <string name="user_name">Enter Name</string>
     <string name="user_name_title">David</string>
     <string name="date_text">Wed - 18th September</string>
+    <string name="meeting_room">Meeting Room</string>
 </resources>

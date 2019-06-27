@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:padding="10dp"
-    android:layout_margin="10dp"
+    android:padding="5dp"
+    android:layout_margin="5dp"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -13,16 +13,16 @@
         android:padding="4dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:id="@+id/listIcon"
             android:src="@drawable/image2"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/listSyncStatusIcon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_below="@+id/listIcon"
             android:layout_alignRight="@+id/listIcon"
             android:layout_marginTop="-12dp"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="@string/user_name_title"
         android:textColor="@android:color/black"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:id="@+id/userNameXML"
         android:gravity="center"/>
 
